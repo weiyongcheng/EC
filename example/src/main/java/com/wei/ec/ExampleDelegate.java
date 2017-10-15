@@ -2,9 +2,11 @@ package com.wei.ec;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.wei.latte.app.LogUtil;
 import com.wei.latte.app.delegates.LatteDelegate;
 import com.wei.latte.app.net.RestClient;
 import com.wei.latte.app.net.callback.IError;
@@ -28,13 +30,13 @@ public class ExampleDelegate extends LatteDelegate{
 
     private void testRestClient() {
         RestClient.builder()
-                .url("http://news.baidu.com/")
+                .url("http://127.0.0.1/index")
 //                .params("", "")
                 .loader(getContext())
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-//                        Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
+                        LogUtil.writeLog(response);
                     }
                 })
                 .failure(new IFailure() {

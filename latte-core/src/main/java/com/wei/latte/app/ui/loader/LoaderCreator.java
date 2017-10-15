@@ -1,4 +1,4 @@
-package com.wei.latte.app.ui;
+package com.wei.latte.app.ui.loader;
 
 import android.content.Context;
 

@@ -6,7 +6,7 @@ import com.wei.latte.app.net.callback.IError;
 import com.wei.latte.app.net.callback.IFailure;
 import com.wei.latte.app.net.callback.IRequest;
 import com.wei.latte.app.net.callback.ISuccess;
-import com.wei.latte.app.ui.LoaderStyle;
+import com.wei.latte.app.ui.loader.LoaderStyle;
 
 import java.io.File;
 import java.util.Map;

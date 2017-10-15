@@ -1,5 +1,7 @@
 package com.wei.latte.app.net.download;
 
+import android.os.AsyncTask;
+
 import com.wei.latte.app.net.RestCreator;
 import com.wei.latte.app.net.callback.IError;
 import com.wei.latte.app.net.callback.IFailure;
@@ -56,12 +58,30 @@ public class DownloadHandler {
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            final ResponseBody responseBody = response.body();
 
+                            final SaveFileTask task = new SaveFileTask(REQUEST, SUCCESS);
+                            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, DOWNLOAD_DIR, EXTENSION, responseBody, NAME);
+
+                            //这里一定要注意判断，否则文件下载不全
+                            if (task.isCancelled()) {
+                                if (REQUEST != null) {
+                                    REQUEST.onRequestEnd();
+                                }
+                            }
+                        }else {
+                            if (ERROR != null) {
+                                ERROR.onError(response.code(), response.message());
+                            }
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                        if (FAILURE != null) {
+                            FAILURE.onFailure();
+                        }
                     }
                 });
     }

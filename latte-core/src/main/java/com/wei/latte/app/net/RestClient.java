@@ -8,14 +8,13 @@ import com.wei.latte.app.net.callback.IRequest;
 import com.wei.latte.app.net.callback.ISuccess;
 import com.wei.latte.app.net.callback.RequestCallbacks;
 import com.wei.latte.app.net.download.DownloadHandler;
-import com.wei.latte.app.ui.LatteLoader;
-import com.wei.latte.app.ui.LoaderStyle;
+import com.wei.latte.app.ui.loader.LatteLoader;
+import com.wei.latte.app.ui.loader.LoaderStyle;
 
 import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;

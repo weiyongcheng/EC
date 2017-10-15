@@ -1,4 +1,4 @@
-package com.wei.latte.app.ui;
+package com.wei.latte.app.ui.loader;
 
 /**
  * Created by Administrator on 2017/10/12.
