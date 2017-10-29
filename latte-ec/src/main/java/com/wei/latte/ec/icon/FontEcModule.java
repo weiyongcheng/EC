@@ -1,5 +1,7 @@
 package com.wei.latte.ec.icon;
 
+import android.support.annotation.Nullable;
+
 import com.joanzapata.iconify.Icon;
 import com.joanzapata.iconify.IconFontDescriptor;
 

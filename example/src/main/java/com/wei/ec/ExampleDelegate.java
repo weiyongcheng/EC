@@ -2,16 +2,14 @@ package com.wei.ec;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import com.wei.latte.app.LogUtil;
-import com.wei.latte.app.delegates.LatteDelegate;
-import com.wei.latte.app.net.RestClient;
-import com.wei.latte.app.net.callback.IError;
-import com.wei.latte.app.net.callback.IFailure;
-import com.wei.latte.app.net.callback.ISuccess;
+import com.wei.latte.util.log.LogUtil;
+import com.wei.latte.delegates.LatteDelegate;
+import com.wei.latte.net.RestClient;
+import com.wei.latte.net.callback.IError;
+import com.wei.latte.net.callback.IFailure;
+import com.wei.latte.net.callback.ISuccess;
 
 /**
  * Created by Administrator on 2017/10/11.
@@ -25,7 +23,7 @@ public class ExampleDelegate extends LatteDelegate{
 
     @Override
     public void onBindView(@Nullable Bundle saveInstanceState, View rootView) {
-        testRestClient();
+//        testRestClient();
     }
 
     private void testRestClient() {

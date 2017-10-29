@@ -1,16 +1,20 @@
 package com.wei.latte.ec.launcher;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
-import com.wei.latte.app.LogUtil;
-import com.wei.latte.app.delegates.LatteDelegate;
-import com.wei.latte.app.ui.launcher.ScrollLauncherTag;
-import com.wei.latte.app.util.storage.LattePreference;
-import com.wei.latte.app.util.timer.BaseTimerTask;
-import com.wei.latte.app.util.timer.ITimerListener;
+import com.wei.latte.app.AccountManager;
+import com.wei.latte.app.IUserChecker;
+import com.wei.latte.delegates.LatteDelegate;
+import com.wei.latte.ui.launcher.ILauncherListener;
+import com.wei.latte.ui.launcher.OnLauncherFinishTag;
+import com.wei.latte.ui.launcher.ScrollLauncherTag;
+import com.wei.latte.util.storage.LattePreference;
+import com.wei.latte.util.timer.BaseTimerTask;
+import com.wei.latte.util.timer.ITimerListener;
 import com.wei.latte.ec.R;
 import com.wei.latte.ec.R2;
 
@@ -32,6 +36,7 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener{
 
     private Timer mTimer = null;
     private int mCount = 5;
+    private ILauncherListener mILauncherListener = null;
 
     @OnClick(R2.id.tv_launcher_timer)
     void onClickTimerView() {
@@ -46,6 +51,14 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener{
         mTimer = new Timer();
         final BaseTimerTask task = new BaseTimerTask(this);
         mTimer.schedule(task, 0, 1000);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ILauncherListener) {
+            mILauncherListener = (ILauncherListener) activity;
+        }
     }
 
     @Override
@@ -64,6 +77,21 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener{
             start(new LaunchScorllDelegate(), SINGLETASK);
         }else {
             //检查用户是否登录了app
+            AccountManager.checkAccount(new IUserChecker() {
+                @Override
+                public void onSignIn() {
+                    if (mILauncherListener != null) {
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.SIGNED);
+                    }
+                }
+
+                @Override
+                public void onNotSignIn() {
+                    if (mILauncherListener != null) {
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.NOT_SIGNED);
+                    }
+                }
+            });
         }
     }
 
