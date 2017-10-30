@@ -13,20 +13,10 @@ import com.wei.latte.delegates.LatteDelegate;
  * Created by Administrator on 2017/10/30.
  */
 
-public class BottomItemDelegtate extends LatteDelegate implements View.OnKeyListener{
+public abstract class BottomItemDelegtate extends LatteDelegate implements View.OnKeyListener{
 
     private long mExitTime = 0;
     private static final int EXIT_ITEM = 2000;
-
-    @Override
-    public Object setLayout() {
-        return null;
-    }
-
-    @Override
-    public void onBindView(@Nullable Bundle saveInstanceState, View rootView) {
-
-    }
 
     @Override
     public void onResume() {
