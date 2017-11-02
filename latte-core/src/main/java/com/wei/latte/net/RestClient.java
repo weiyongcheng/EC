@@ -10,6 +10,7 @@ import com.wei.latte.net.callback.RequestCallbacks;
 import com.wei.latte.net.download.DownloadHandler;
 import com.wei.latte.ui.loader.LatteLoader;
 import com.wei.latte.ui.loader.LoaderStyle;
+import com.wei.latte.util.log.LogUtil;
 
 import java.io.File;
 import java.util.Map;
@@ -86,6 +87,7 @@ public class RestClient {
 
         switch (method) {
             case GET:
+                LogUtil.writeLog("Get: URL: " + URL);
                 call = service.get(URL, PARAMS);
                 break;
             case POST:
