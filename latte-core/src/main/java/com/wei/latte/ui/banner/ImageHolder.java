@@ -29,7 +29,7 @@ public class ImageHolder implements Holder<String>{
     @Override
     public View createView(Context context) {
         mImageView = new AppCompatImageView(context);
-        return null;
+        return mImageView;
     }
 
     @Override

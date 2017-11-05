@@ -2,8 +2,10 @@ package com.wei.latte.ec.main.index;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -14,10 +16,13 @@ import com.joanzapata.iconify.widget.IconTextView;
 import com.wei.latte.delegates.bottom.BottomItemDelegtate;
 import com.wei.latte.ec.R;
 import com.wei.latte.ec.R2;
+import com.wei.latte.ec.main.EcBottomDelegate;
 import com.wei.latte.net.RestClient;
 import com.wei.latte.net.callback.ISuccess;
+import com.wei.latte.ui.recycler.BaseDecoration;
 import com.wei.latte.ui.recycler.MultipleFields;
 import com.wei.latte.ui.recycler.MultipleItemEntity;
+import com.wei.latte.ui.refresh.PageBean;
 import com.wei.latte.ui.refresh.RefreshHandler;
 import com.wei.latte.util.log.LogUtil;
 
@@ -47,23 +52,7 @@ public class IndexDelegate extends BottomItemDelegtate{
 
     @Override
     public void onBindView(@Nullable Bundle saveInstanceState, View rootView) {
-        mRefreshHandler = new RefreshHandler(mRefreshLayout);
-        RestClient.builder()
-                .url("http://192.168.0.100:3000/goods_detail_data_2")
-                .success(new ISuccess() {
-                    @Override
-                    public void onSuccess(String response) {
-                        LogUtil.writeLog(response);
-
-                        final IndexDataConvert convert = new IndexDataConvert();
-                        convert.setJsonData(response);
-                        final ArrayList<MultipleItemEntity> list = convert.convert();
-                        final String image = list.get(1).getField(MultipleFields.IMAGE_URL);
-                        Toast.makeText(getContext(), image, Toast.LENGTH_LONG).show();
-                    }
-                })
-                .build()
-                .get();
+        mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new IndexDataConvert());
     }
 
     private void initRefreshLayout() {
@@ -75,11 +64,21 @@ public class IndexDelegate extends BottomItemDelegtate{
         mRefreshLayout.setProgressViewOffset(true, 120, 300);
     }
 
+    private void initRecyclerView() {
+        final GridLayoutManager manager = new GridLayoutManager(getContext(), 4);
+        mRecyclerView.setLayoutManager(manager);
+        mRecyclerView.addItemDecoration
+                (BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
+        final EcBottomDelegate ecBottomDelegate = getParentDelegate();
+        mRecyclerView.addOnItemTouchListener(IndexItemClickListener.create(ecBottomDelegate));
+    }
+
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         initRefreshLayout();
-        mRefreshHandler.firstPage("goods_detail_data_1");
+        initRecyclerView();
+        mRefreshHandler.firstPage("index_data");
     }
 
     @Override

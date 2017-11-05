@@ -76,7 +76,6 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
     public void onBindView(@Nullable Bundle saveInstanceState, View rootView) {
         final int size = ITEMS.size();
         for (int i = 0; i < size; ++i) {
-            //todo 加了false后会导致item为空，不知道为什么
             LayoutInflater.from(getContext()).inflate(R.layout.bottom_item_icon_text_layout, mBottomBar);
             final RelativeLayout item = (RelativeLayout) mBottomBar.getChildAt(i);
             //设置每个item的点击事件

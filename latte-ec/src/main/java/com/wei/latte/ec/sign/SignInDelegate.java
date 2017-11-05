@@ -47,7 +47,7 @@ public class SignInDelegate extends LatteDelegate{
     void onClickSignIn() {
         if (checkForm()) {
             RestClient.builder()
-                    .url("http://192.168.0.100:3000/user_profile")
+                    .url("user_profile")
 //                    .params("email", mEmail.getText().toString())
 //                    .params("password", mPassword.getText().toString())
                     .success(new ISuccess() {
@@ -58,7 +58,7 @@ public class SignInDelegate extends LatteDelegate{
                         }
                     })
                     .build()
-                    .get();
+                    .post();
         }
     }
 

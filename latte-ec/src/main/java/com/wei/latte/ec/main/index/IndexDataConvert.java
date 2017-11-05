@@ -7,6 +7,7 @@ import com.wei.latte.ui.recycler.DataConverter;
 import com.wei.latte.ui.recycler.ItemType;
 import com.wei.latte.ui.recycler.MultipleFields;
 import com.wei.latte.ui.recycler.MultipleItemEntity;
+import com.wei.latte.util.log.LogUtil;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ public class IndexDataConvert extends DataConverter{
     @Override
     public ArrayList<MultipleItemEntity> convert() {
 
-
+        LogUtil.writeLog("jsonData: " + getJsonData());
         final JSONArray dataArray = JSON.parseObject(getJsonData()).getJSONArray("data");
         final int size = dataArray.size();
         for (int i = 0; i < size; ++i) {

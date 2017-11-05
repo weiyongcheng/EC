@@ -73,7 +73,7 @@ public abstract class BaseWXEntryActivity extends BaseWXActivity{
                     }
                 })
                 .build()
-                .get();
+                .post();
     }
 
     private void getUserInfo(String userInfoUrl) {

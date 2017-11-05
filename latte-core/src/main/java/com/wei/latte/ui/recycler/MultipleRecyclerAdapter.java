@@ -1,10 +1,7 @@
 package com.wei.latte.ui.recycler;
 
-import android.support.annotation.BoolRes;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
@@ -14,9 +11,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.wei.latte.R;
 import com.wei.latte.ui.banner.BannerCreator;
+import com.wei.latte.util.log.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +65,7 @@ implements BaseQuickAdapter.SpanSizeLookup, OnItemClickListener{
 
     @Override
     protected MultipleViewHolder createBaseViewHolder(View view) {
-        return MultipleViewHolder.crete(view)
+        return MultipleViewHolder.crete(view);
     }
 
     @Override
@@ -79,7 +76,7 @@ implements BaseQuickAdapter.SpanSizeLookup, OnItemClickListener{
         switch (holder.getItemViewType()) {
             case ItemType.TEXT:
                 text = entity.getField(MultipleFields.TEXT);
-                holder.setText(R.id.text_signle, text);
+                holder.setText(R.id.text_single, text);
                 break;
             case ItemType.IMAGE:
                 imageUrl = entity.getField(MultipleFields.IMAGE_URL);
@@ -94,12 +91,13 @@ implements BaseQuickAdapter.SpanSizeLookup, OnItemClickListener{
                 Glide.with(mContext)
                         .load(imageUrl)
                         .apply(RECYCLER_OPTIONS)
-                        .into((ImageView) holder.getView(R.id.img_single));
+                        .into((ImageView) holder.getView(R.id.img_multiple));
                 holder.setText(R.id.tv_multiple, text);
                 break;
             case ItemType.BANNER:
                 if (!mIsInitBanner) {
                     bannerImages = entity.getField(MultipleFields.BANNERS);
+                    LogUtil.writeLog("bannerImages: " + bannerImages.toString());
                     final ConvenientBanner<String> convenientBanner = holder.getView(R.id.banner_recycler_item);
                     BannerCreator.setDefault(convenientBanner, bannerImages, this);
                     mIsInitBanner = true;
