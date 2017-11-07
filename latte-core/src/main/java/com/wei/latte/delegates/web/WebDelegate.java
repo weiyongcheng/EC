@@ -15,14 +15,14 @@ import java.lang.ref.WeakReference;
  * Created by Administrator on 2017/11/7.
  */
 
-public abstract class WebDelegatre extends LatteDelegate{
+public abstract class WebDelegate extends LatteDelegate implements IWebViewInitializer{
 
     private WebView  mWebView = null;
     private final ReferenceQueue<WebView> WEB_VIEW_QUEUE = new ReferenceQueue<>();
     private String mUrl = null;
     private boolean mIsWebViewAbailable = false;    //webview是否完成初始化
 
-    public WebDelegatre() {
+    public WebDelegate() {
     }
 
     public abstract IWebViewInitializer setInitializer();
@@ -55,6 +55,22 @@ public abstract class WebDelegatre extends LatteDelegate{
                 throw new NullPointerException("Initializer is null");
             }
         }
+    }
+
+    public WebView getWebView() {
+
+        if (mWebView == null) {
+            throw new NullPointerException("WebView IS NULL");
+        }
+        return mIsWebViewAbailable ? mWebView : null;
+    }
+
+    public String getUrl() {
+        if (mUrl == null) {
+            throw new NullPointerException("Url Is Null");
+        }
+
+        return mUrl;
     }
 
     @Override

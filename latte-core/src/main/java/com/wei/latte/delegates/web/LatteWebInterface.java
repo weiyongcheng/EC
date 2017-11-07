@@ -8,13 +8,13 @@ import com.alibaba.fastjson.JSON;
 
 public class LatteWebInterface {
 
-    private final WebDelegatre DELEGATRE;
+    private final WebDelegate DELEGATRE;
 
-    public LatteWebInterface(WebDelegatre delegatre) {
+    public LatteWebInterface(WebDelegate delegatre) {
         this.DELEGATRE = delegatre;
     }
 
-    static LatteWebInterface create(WebDelegatre delegatre) {
+    static LatteWebInterface create(WebDelegate delegatre) {
         return new LatteWebInterface(delegatre);
     }
 
