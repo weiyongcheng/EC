@@ -1,7 +1,6 @@
 package com.wei.latte.net.callback;
 
 import android.os.Handler;
-import android.util.Log;
 
 import com.wei.latte.ui.loader.LatteLoader;
 import com.wei.latte.ui.loader.LoaderStyle;

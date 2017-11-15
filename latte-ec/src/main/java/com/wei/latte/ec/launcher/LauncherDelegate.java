@@ -74,7 +74,7 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener{
     //判断是否显示滑动启动页
     private void checkIsShowScroll() {
         if (!LattePreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name())) {
-            start(new LaunchScorllDelegate(), SINGLETASK);
+            getSupportDelegate().start(new LaunchScorllDelegate(), SINGLETASK);
         }else {
             //检查用户是否登录了app
             AccountManager.checkAccount(new IUserChecker() {

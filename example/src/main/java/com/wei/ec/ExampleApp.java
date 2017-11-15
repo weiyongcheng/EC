@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.wei.latte.app.Latte;
-import com.wei.latte.net.interceptors.DebugInterceptor;
+import com.wei.ec.event.TestEvent;
 import com.wei.latte.ec.database.DatabaseManager;
 import com.wei.latte.ec.icon.FontEcModule;
 
@@ -23,6 +23,8 @@ public class ExampleApp extends Application{
 //                .withInterceptor(new DebugInterceptor("test", R.raw.test))
                 .withWeChatAppId("")
                 .withWeChatSecret("")
+                .withJavascriptInterface("latte")
+                .withWebEvent("test", new TestEvent())
                 .configure();
         DatabaseManager.getInstance().init(this);
     }

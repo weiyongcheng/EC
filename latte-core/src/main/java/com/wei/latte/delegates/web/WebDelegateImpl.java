@@ -7,6 +7,8 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.wei.latte.delegates.IPageLoadListener;
+import com.wei.latte.delegates.web.chromClient.WebChromClientImple;
 import com.wei.latte.delegates.web.client.WebViewClientImple;
 import com.wei.latte.delegates.web.route.RouteKeys;
 import com.wei.latte.delegates.web.route.Router;
@@ -16,6 +18,8 @@ import com.wei.latte.delegates.web.route.Router;
  */
 
 public class WebDelegateImpl extends WebDelegate {
+
+    private IPageLoadListener mIPageLoadListener = null;
 
     public static WebDelegateImpl create(String url) {
 
@@ -29,6 +33,10 @@ public class WebDelegateImpl extends WebDelegate {
     @Override
     public Object setLayout() {
         return getWebView();
+    }
+
+    public void setIPageLoadListener(IPageLoadListener listener) {
+        this.mIPageLoadListener = listener;
     }
 
     @Override
@@ -46,17 +54,18 @@ public class WebDelegateImpl extends WebDelegate {
 
     @Override
     public WebView initWebView(WebView webView) {
-        return null;
+        return new WebViewInitializer().createWebView(webView);
     }
 
     @Override
     public WebViewClient initWebViewClicent() {
-        final WebViewClientImple clientImple = new WebViewClientImple(this);
-        return clientImple;
+        final WebViewClientImple client = new WebViewClientImple(this);
+        client.setIPageLoadListener(mIPageLoadListener);
+        return client;
     }
 
     @Override
     public WebChromeClient initWebChromClient() {
-        return null;
+        return new WebChromClientImple();
     }
 }
