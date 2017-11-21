@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
 
@@ -23,10 +23,12 @@ android {
     }
 }
 
+
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':latte-core')
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     compile project(':latte-ui')
     //圆形图片
     compile 'de.hdodenhof:circleimageview:2.1.0'

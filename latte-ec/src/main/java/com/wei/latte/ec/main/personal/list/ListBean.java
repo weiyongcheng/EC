@@ -30,7 +30,7 @@ public class ListBean implements MultiItemEntity{
         this.mOnCheckedChangeListener = mOnCheckedChangeListener;
     }
 
-    public String getmImageUrl() {
+    public String getImageUrl() {
         return mImageUrl;
     }
 
@@ -42,17 +42,17 @@ public class ListBean implements MultiItemEntity{
     }
 
     public String getmValue() {
-        if (mText == null) {
+        if (mValue == null) {
             return "";
         }
         return mValue;
     }
 
-    public int getmId() {
+    public int getId() {
         return mId;
     }
 
-    public LatteDelegate getmDelegate() {
+    public LatteDelegate getDelegate() {
         return mDelegate;
     }
 
@@ -62,7 +62,7 @@ public class ListBean implements MultiItemEntity{
 
     @Override
     public int getItemType() {
-        return 0;
+        return mItemType;
     }
 
     public static final class Builder {

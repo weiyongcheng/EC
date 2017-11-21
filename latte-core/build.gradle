@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
 
@@ -29,9 +29,9 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     //Android support包
-    compile 'com.android.support:support-v4:26.+'
-    compile 'com.android.support:appcompat-v7:26+'
-    compile 'com.android.support:design:26.+'
+    compile 'com.android.support:support-v4:26.1.0'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     compile project(':latte-annotations')
@@ -42,8 +42,8 @@ dependencies {
     compile 'me.yokeyword:fragmentation:1.1.6'
     compile 'me.yokeyword:fragmentation-swipeback:1.1.6'
     //ButterKnife依赖
-    compile 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     //网络请求依赖
     compile 'com.squareup.okio:okio:1.13.0'
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
@@ -65,6 +65,15 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxjava:2.1.1'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    //动态权限处理
+    compile ('com.github.hotchemi:permissionsdispatcher:2.4.0', {
+        exclude group: 'com.android.support'
+    })
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.4.0'
+    //图片剪裁
+    compile 'com.github.yalantis:ucrop:2.2.1-native'
+    //工具包
+    compile 'com.blankj:utilcode:1.9.0'
     //沉浸式状态栏依赖
     dependencies {
         compile ('com.github.niorgai:StatusBarCompat:2.1.4', {
